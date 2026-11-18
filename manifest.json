@@ -1,0 +1,89 @@
+{
+  "id": "cn.audcore.example.web-desktop",
+  "name": "网页桌面皮肤",
+  "author": "Audcore",
+  "version": "0.1.9",
+  "api": {
+    "major": 1,
+    "minor": 0
+  },
+  "entry": "web/desktop.html",
+  "window": {
+    "default": [
+      460,
+      400
+    ],
+    "min": [
+      320,
+      240
+    ],
+    "max": null,
+    "resizable": true,
+    "maximizable": true
+  },
+  "themes": [
+    "dark",
+    "light"
+  ],
+  "scale": {
+    "min": 0.75,
+    "max": 2,
+    "default": 1
+  },
+  "languages": [
+    "zh",
+    "en",
+    "ja"
+  ],
+  "preview": "assets/preview.png",
+  "kind": "web",
+  "license": "MIT",
+  "repository": "https://github.com/audcore/audcore-skin-desktop",
+  "description": "网页桌面皮肤，声核独立网页皮肤",
+  "build": {
+    "schema": 1,
+    "recipe": "web-static",
+    "platform": "windows-x86_64",
+    "toolchain": {
+      "tools": {
+        "node": "24.12.0"
+      }
+    },
+    "files": [
+      "LICENSE",
+      "assets/preview.png",
+      "web/channel-color.mjs",
+      "web/channel-name.mjs",
+      "web/desktop.css",
+      "web/desktop.html",
+      "web/i18n-cache.mjs",
+      "web/icons/hide.svg",
+      "web/icons/keyboard.svg",
+      "web/icons/link.svg",
+      "web/icons/lock.svg",
+      "web/icons/pause.svg",
+      "web/icons/play.svg",
+      "web/icons/plus.svg",
+      "web/icons/polarity.svg",
+      "web/icons/record.svg",
+      "web/icons/settings.svg",
+      "web/icons/solo.svg",
+      "web/latency.mjs",
+      "web/link-slots.mjs",
+      "web/logo-sliders.svg",
+      "web/meters.mjs",
+      "web/page.mjs",
+      "web/pending-toggle.mjs",
+      "web/send-label.mjs",
+      "web/send-targets.mjs",
+      "web/skin-menu.css",
+      "web/skin-menu.mjs",
+      "web/skin.css",
+      "web/skin.mjs",
+      "web/startup.mjs",
+      "web/transport-control.mjs",
+      "web/webview-bridge.mjs",
+      "web/window-controls.mjs"
+    ]
+  }
+}

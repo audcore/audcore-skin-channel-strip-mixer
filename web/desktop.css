@@ -1,0 +1,338 @@
+@import url("./skin.css");
+
+/* The desktop skin follows the native mixer's fixed sidebar and channel width.
+   The separate index.html keeps the deliberately plain website prototype. */
+:root {
+  background: #181818;
+  --channel-surface: #272727;
+  --control-surface: #303030;
+  --field-surface: #242424;
+  --button-surface: #3c3c3c;
+}
+
+:root[data-theme="light"] {
+  background: #eeeeee;
+  --channel-surface: #dddddd;
+  --control-surface: #d4d4d4;
+  --field-surface: #e4e4e4;
+  --button-surface: #c4c4c4;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#skin-root {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 40px;
+  height: 100%;
+  padding: 8px 2px;
+  overflow: hidden;
+}
+
+.toolbar button {
+  width: 36px;
+  min-height: 32px;
+  padding: 0;
+  background: transparent;
+  font-size: 11px;
+}
+
+.toolbar button:hover,
+.toolbar button:focus-visible {
+  background: var(--button-surface);
+}
+
+.toolbar .brand {
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  background-image: url("./logo-sliders.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px 22px;
+  font-size: 0;
+}
+
+.toolbar :is(#add-channel, #transport, #settings, #window-close) {
+  display: grid;
+  place-items: center;
+  font-size: 0;
+}
+
+.toolbar :is(#add-channel, #transport, #settings, #window-close)::before {
+  width: 22px;
+  height: 22px;
+  background: currentColor;
+  content: "";
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+#add-channel::before {
+  mask-image: url("./icons/plus.svg");
+}
+
+#transport::before {
+  mask-image: url("./icons/play.svg");
+}
+
+#transport[aria-pressed="true"]::before {
+  mask-image: url("./icons/pause.svg");
+}
+
+#settings::before {
+  mask-image: url("./icons/settings.svg");
+}
+
+#window-close::before {
+  mask-image: url("./icons/hide.svg");
+}
+
+.toolbar .window-drag {
+  flex: 1 1 auto;
+  width: 36px;
+  min-height: 24px;
+  line-height: normal;
+  writing-mode: vertical-rl;
+  text-overflow: ellipsis;
+}
+
+@media (max-height: 360px) {
+  .toolbar {
+    gap: 0;
+    padding: 4px 2px;
+  }
+
+  .toolbar button {
+    min-height: 24px;
+  }
+
+  .toolbar #audio-status {
+    display: none;
+  }
+}
+
+.toolbar #audio-status {
+  width: 36px;
+  font-size: 9px;
+  line-height: 14px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+main {
+  min-width: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+#channels {
+  height: 100%;
+  min-height: 0;
+  gap: 0;
+  padding: 0;
+}
+
+.channel {
+  height: 100%;
+  min-height: 0;
+  border-radius: 3px;
+}
+
+.input,
+.effects div,
+.sends div {
+  padding: 3px 4px;
+}
+
+.effects {
+  gap: 1px;
+  padding: 2px;
+}
+
+.controls {
+  position: relative;
+  display: block;
+  flex: 0 0 190px;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.gain {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  bottom: 24px;
+  left: 0;
+  width: 26px;
+  height: auto;
+  background: transparent;
+}
+
+.gain::-webkit-slider-runnable-track {
+  width: 9px;
+  background: transparent;
+}
+
+.gain::-webkit-slider-thumb {
+  width: 14px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--channel-color);
+}
+
+.meter {
+  position: absolute;
+  top: 10px;
+  bottom: 24px;
+  left: 9px;
+  width: 9px;
+  height: auto;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.values {
+  position: absolute;
+  top: 31px;
+  right: 0;
+  bottom: 20px;
+  width: 38px;
+  gap: 0;
+}
+
+.values [data-control="value"] {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  width: 44px;
+  font-size: 11px;
+}
+
+.values button {
+  flex: 1 1 0;
+  min-height: 0;
+  background: transparent;
+}
+
+.values button[aria-pressed="true"] {
+  background: transparent;
+  color: var(--channel-color);
+}
+
+.values :is([data-control="phase"], [data-control="solo"], [data-control="link"][aria-pressed="false"], [data-control="shortcut"][data-assigned="false"], [data-control="recording"][data-assigned="false"]) {
+  display: grid;
+  place-items: center;
+  font-size: 0;
+}
+
+.values :is([data-control="phase"], [data-control="solo"], [data-control="link"][aria-pressed="false"], [data-control="shortcut"][data-assigned="false"], [data-control="recording"][data-assigned="false"])::before {
+  width: 22px;
+  height: 22px;
+  background: currentColor;
+  content: "";
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+[data-control="phase"]::before {
+  mask-image: url("./icons/polarity.svg");
+}
+
+[data-control="solo"]::before {
+  mask-image: url("./icons/solo.svg");
+}
+
+[data-control="solo"][data-safe="true"]::before {
+  mask-image: url("./icons/lock.svg");
+}
+
+[data-control="link"]::before {
+  mask-image: url("./icons/link.svg");
+}
+
+[data-control="shortcut"]::before {
+  mask-image: url("./icons/keyboard.svg");
+}
+
+[data-control="recording"]::before {
+  mask-image: url("./icons/record.svg");
+}
+
+.values > [hidden] {
+  display: none;
+}
+
+.values [data-control="fx"] {
+  order: 1;
+}
+
+.values [data-control="solo"] {
+  order: 2;
+}
+
+.values [data-control="phase"] {
+  order: 3;
+}
+
+.values [data-control="link"] {
+  order: 4;
+}
+
+.values [data-control="recording"] {
+  order: 6;
+}
+
+.values [data-control="shortcut"] {
+  order: 5;
+}
+
+.values [data-control="mute"] {
+  order: 7;
+  flex: 0 0 28px;
+  width: 28px;
+  align-self: center;
+  border: 3px solid var(--channel-color);
+  border-radius: 50%;
+  font-size: 0;
+}
+
+.values [data-control="mute"][aria-pressed="true"] {
+  background: var(--channel-color);
+}
+
+.values [data-control="overload"] {
+  position: absolute;
+  top: -25px;
+  left: -26px;
+  width: 24px;
+  height: 18px;
+}
+
+.values [data-control="overload"][data-overload="false"] {
+  visibility: hidden;
+}
+
+.name {
+  flex: 0 0 24px;
+  box-sizing: border-box;
+  padding: 4px;
+  background: var(--control-surface);
+  color: inherit;
+}
