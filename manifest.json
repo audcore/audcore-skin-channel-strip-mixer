@@ -38,8 +38,8 @@
   "preview": "assets/preview.png",
   "kind": "web",
   "license": "MIT",
-  "repository": "https://github.com/audcore/audcore-skin-desktop",
-  "description": "网页桌面皮肤，声核独立网页皮肤",
+  "repository": "https://github.com/audcore/audcore-skin-channel-strip-mixer",
+  "description": "传统竖向通道条布局，音量推子与左右电平并排，常用操作集中在固定侧栏。",
   "build": {
     "schema": 1,
     "recipe": "web-static",
